@@ -65,7 +65,7 @@ FROM (
   menus.price*trx.qty AS total_price
   from transactions AS trx
   JOIN customers AS cust
-  on trx.customer_id = cust.id
+  ON trx.customer_id = cust.id
   JOIN menus 
   ON trx.menu_id = menus.menu_id
   GROUP BY 
