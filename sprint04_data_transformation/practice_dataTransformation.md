@@ -335,7 +335,7 @@ gs4_deauth()
 read google sheet from first sheet
 ```
 url <- "<url link>"
-df <- read_sheet(url, shee=1)
+df <- read_sheet(url, sheet=1)
 ```
 
 ## Additional
