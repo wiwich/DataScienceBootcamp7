@@ -338,9 +338,6 @@ url <- "<url link>"
 df <- read_sheet(url, shee=1)
 ```
 
-
-
-
 ## Additional
 example: read csv file
 ```
@@ -354,4 +351,46 @@ example: random sample (sampling)
 df %>% 
 	select(model) %>%
 	sample_n(3)
+```
+
+## PostgreSQL
+
+**elephantSQL**: https://www.elephantsql.com/
+
+**Connect R to SQL server (postgresql)**
+- import package: `RPostgreSQL` for postgreSQL (`RMysql` for mySQL, `bigQueryR` for bigQuery)
+
+```
+## connect to SQL server (postgresql)
+library(RPostgreSQL)
+
+# dbConnect(PostgreSQL(), server, username, password, host, port, dbname)
+con <- dbConnect(PostgreSQL(), 
+									host = "arjuna.db.elephantsql.com",
+									port = 5432, # default fix port for PostgreSQL
+									# default port mySQL 3306 (search Google)
+									user = "jznjhnsz", # User & Default database
+									password = "<password>",
+									dbname = "jznjhnsz") # User & Default database
+
+# list table in server
+dbListTables(con)
+
+# create database
+pets <- data.frame(
+	id = 1:3,
+	name = c("Donkey", "Unicorn", "Dragon")
+)
+
+# write table
+dbWriteTable(con, "myPets", pets)
+
+# query data
+dbGetQuery(con, "select * from myPets")
+
+# remove table
+dbRemoveTable(con, "myPets")
+
+## close connection (always)
+dbDisconnect(con)
 ```
